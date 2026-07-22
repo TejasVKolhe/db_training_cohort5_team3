@@ -1,7 +1,8 @@
 C4Context
-    '''mermaid
+    
     title C4 Context — ReconX Enterprise Trade Reconciliation Platform
 
+'''mermaid
     Person(traderUser, "Trader", "Books and amends trades; investigates breaks.")
     Person(reconAnalyst, "Recon Analyst", "Resolves daily reconciliation breaks.")
     Person(opsAdmin, "Ops Admin", "Manages users, audits activity.")
