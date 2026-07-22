@@ -1,4 +1,5 @@
 C4Context
+    '''mermaid
     title C4 Context — ReconX Enterprise Trade Reconciliation Platform
 
     Person(traderUser, "Trader", "Books and amends trades; investigates breaks.")
@@ -26,3 +27,4 @@ C4Context
     Rel(reconx, emailGateway, "Sends break notifications", "SMTP")
     Rel(reconx, ssoIdP, "Validates user", "OIDC, HTTPS")
     Rel(grafana, reconx, "Scrapes /actuator/prometheus", "HTTPS")
+    '''
