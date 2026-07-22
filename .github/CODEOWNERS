@@ -1,0 +1,6 @@
+# .github/CODEOWNERS
+*               @TejasVKolhe
+backend/        @TejasVKolhe @gaya3jayan-11
+frontend/       @TejasVKolhe @Sreeja-Karnati
+db/             @TejasVKolhe @yashita89
+.github/        @TejasVKolhe
