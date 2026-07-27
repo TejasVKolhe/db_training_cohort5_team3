@@ -1,6 +1,13 @@
 -- ============================================================================
 -- TICKET-ADV007 — Convert trades to monthly range-partitioned table (Postgres)
 --
+-- Creates monthly partitions for Apr-Jul 2026.
+-- Primary key includes partition key (trade_date).
+-- ============================================================================
+
+-- ============================================================================
+-- Convert trades to monthly range-partitioned table (Postgres)
+--
 -- WARNING: destructive. Run in a maintenance window — copies the entire
 -- trades table into a new partitioned trades, then renames.
 -- ============================================================================
