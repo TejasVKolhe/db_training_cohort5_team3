@@ -1,7 +1,7 @@
 # ADR-0001 — Partition the `trades` table by `trade_date`
 
 - Status: Accepted
-- Date: 2026-06-02
+- Date: 2026-07-27
 - Deciders: ReconX team
 
 ## Context

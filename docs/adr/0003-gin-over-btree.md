@@ -1,7 +1,7 @@
 # ADR-0003 — Use a GIN index with `jsonb_path_ops` on `instruments.metadata`
 
 - Status: Accepted
-- Date: 2026-06-04
+- Date: 2026-07-27
 - Deciders: ReconX team
 
 ## Context

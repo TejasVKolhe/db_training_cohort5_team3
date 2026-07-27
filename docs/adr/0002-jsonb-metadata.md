@@ -1,7 +1,7 @@
 # ADR-0002 — Store instrument metadata in a PostgreSQL JSONB column (`instruments.metadata`)
 
 - Status: Accepted
-- Date: 2026-06-03
+- Date: 2026-07-27
 - Deciders: ReconX team
 
 ## Context
