@@ -17,9 +17,15 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
 
+
     <changeSet id="005-mv-daily-recon-summary" author="trainer">
         <preConditions onFail="MARK_RAN">
-            <dbms type="postgresql"/>
+            <and>
+                <dbms type="postgresql"/>
+                <sqlCheck expectedResult="0">
+                    SELECT COUNT(*) FROM pg_matviews WHERE matviewname = 'mv_daily_recon_summary'
+                </sqlCheck>
+            </and>
         </preConditions>
         <sql splitStatements="false"><![CDATA[
             CREATE MATERIALIZED VIEW mv_daily_recon_summary AS
@@ -33,6 +39,7 @@
             WHERE deleted_at IS NULL
             GROUP BY trade_date;
 
+
             CREATE UNIQUE INDEX uq_mv_daily_recon_summary_trade_date
                 ON mv_daily_recon_summary (trade_date);
         ]]></sql>
@@ -40,5 +47,6 @@
             <sql>DROP MATERIALIZED VIEW IF EXISTS mv_daily_recon_summary;</sql>
         </rollback>
     </changeSet>
+
 
 </databaseChangeLog>
