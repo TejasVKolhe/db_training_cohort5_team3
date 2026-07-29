@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+PostgreSQL-specific JSONB support.
+
+This changeset is guarded by a PostgreSQL precondition because
+JSONB and jsonb_path_ops are not supported by H2.
+onFail="MARK_RAN" allows non-PostgreSQL databases to skip this
+changeset without failing the migration.
+-->
+<!--
  ============================================================================
  TICKET-ADV009 — JSONB column on instruments (+ GIN index on Postgres)
  WHAT:    instruments.metadata as JSONB to hold per-asset-class detail
