@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.dbtraining.reconx.model.EquityTradeTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.489 s <<< FAILURE! -- in com.dbtraining.reconx.model.EquityTradeTest
+com.dbtraining.reconx.model.EquityTradeTest.equality_byTradeRef -- Time elapsed: 0.372 s <<< ERROR!
+java.lang.UnsupportedOperationException: TICKET-ADV028
+	at com.dbtraining.reconx.model.EquityTrade.equals(EquityTrade.java:70)
+	at org.assertj.core.internal.StandardComparisonStrategy.areEqual(StandardComparisonStrategy.java:108)
+	at org.assertj.core.internal.Objects.areEqual(Objects.java:228)
+	at org.assertj.core.internal.Objects.assertEqual(Objects.java:219)
+	at org.assertj.core.api.AbstractAssert.isEqualTo(AbstractAssert.java:374)
+	at com.dbtraining.reconx.model.EquityTradeTest.equality_byTradeRef(EquityTradeTest.java:40)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
