@@ -32,24 +32,45 @@ public enum ReconciliationRule {
         this.qtyToleranceAbs   = qtyToleranceAbs;
     }
 
-    public BigDecimal priceTolerancePct() { return priceTolerancePct; }
-    public BigDecimal qtyToleranceAbs()   { return qtyToleranceAbs; }
-
     /**
-     * Decide whether two prices/quantities are within this rule's tolerance.
-     * @return true if BOTH the price diff (as %) AND the qty diff (as abs)
-     *         are within tolerance.
-     */
-    public boolean matches(BigDecimal internalPrice, BigDecimal internalQty,
-                           BigDecimal externalPrice, BigDecimal externalQty) {
-        BigDecimal priceDiff = internalPrice.subtract(externalPrice).abs();
-        BigDecimal priceDiffPct = internalPrice.signum() == 0
-                ? BigDecimal.ZERO
-                : priceDiff.divide(internalPrice, 6, java.math.RoundingMode.HALF_UP);
-        BigDecimal qtyDiff = internalQty.subtract(externalQty).abs();
+ * Returns the maximum permitted price difference expressed as a percentage.
+ *
+ * @return price tolerance percentage for this reconciliation rule
+ */
+public BigDecimal priceTolerancePct() {
+    return priceTolerancePct;
+}
 
-        boolean priceOk = priceDiffPct.compareTo(priceTolerancePct) <= 0;
-        boolean qtyOk   = qtyDiff.compareTo(qtyToleranceAbs) <= 0;
-        return priceOk && qtyOk;
-    }
+/**
+ * Returns the maximum permitted absolute quantity difference.
+ *
+ * @return quantity tolerance in absolute units
+ */
+public BigDecimal qtyToleranceAbs() {
+    return qtyToleranceAbs;
+}
+
+/**
+ * Determines whether the supplied prices and quantities satisfy this
+ * reconciliation rule.
+ *
+ * @param internalPrice price from the internal trade
+ * @param internalQty quantity from the internal trade
+ * @param externalPrice price from the external trade
+ * @param externalQty quantity from the external trade
+ * @return {@code true} if both the price difference and quantity difference
+ *         are within this rule's configured tolerances; {@code false} otherwise
+ */
+public boolean matches(BigDecimal internalPrice, BigDecimal internalQty,
+                       BigDecimal externalPrice, BigDecimal externalQty) {
+    BigDecimal priceDiff = internalPrice.subtract(externalPrice).abs();
+    BigDecimal priceDiffPct = internalPrice.signum() == 0
+            ? BigDecimal.ZERO
+            : priceDiff.divide(internalPrice, 6, java.math.RoundingMode.HALF_UP);
+    BigDecimal qtyDiff = internalQty.subtract(externalQty).abs();
+
+    boolean priceOk = priceDiffPct.compareTo(priceTolerancePct) <= 0;
+    boolean qtyOk = qtyDiff.compareTo(qtyToleranceAbs) <= 0;
+    return priceOk && qtyOk;
+}
 }

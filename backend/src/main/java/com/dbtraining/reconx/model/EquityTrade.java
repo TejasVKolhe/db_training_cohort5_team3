@@ -45,73 +45,199 @@ public final class EquityTrade implements TradeType {
         this.counterpartyId   = b.counterpartyId;
     }
 
-    public static Builder builder() { return new Builder(); }
+    /**
+ * Creates a new builder for constructing {@code EquityTrade} instances.
+ *
+ * @return a new builder configured for fluent trade creation
+ */
+public static Builder builder() {
+    return new Builder();
+}
 
-    @Override public TradeRef tradeRef()    { return tradeRef; }
-    @Override public LocalDate tradeDate()  { return tradeDate; }
-    @Override public AssetClass assetClass(){ return AssetClass.EQUITY; }
+/**
+ * Returns the unique reference assigned to this trade.
+ *
+ * @return trade reference used to identify the trade
+ */
+@Override
+public TradeRef tradeRef() {
+    return tradeRef;
+}
 
-    /** Notional = quantity * price in the trade currency. */
-    @Override public Money notional() {
-        return new Money(quantity.multiply(price), currency);
-    }
+/**
+ * Returns the execution date of the trade.
+ *
+ * @return date on which the trade was executed
+ */
+@Override
+public LocalDate tradeDate() {
+    return tradeDate;
+}
 
-    public String instrumentSymbol() { return instrumentSymbol; }
-    public BigDecimal quantity()     { return quantity; }
-    public BigDecimal price()        { return price; }
-    public Currency currency()       { return currency; }
-    public Side side()               { return side; }
-    public long counterpartyId()     { return counterpartyId; }
+/**
+ * Returns the asset class represented by this trade.
+ *
+ * @return {@link AssetClass#EQUITY}
+ */
+@Override
+public AssetClass assetClass() {
+    return AssetClass.EQUITY;
+}
 
-    /** equals: two EquityTrades are equal iff their tradeRef is equal. */
-    @Override
-    public boolean equals(Object o) {
-        return (o instanceof EquityTrade other) && tradeRef.equals(other.tradeRef);
-    }
+/**
+ * Returns the notional value of the equity trade.
+ *
+ * @return monetary value calculated as the quantity multiplied by
+ *         the trade price in the trade currency
+ */
+@Override
+public Money notional() {
+    return new Money(quantity.multiply(price), currency);
+}
 
-    @Override public int hashCode() {
-        return tradeRef.hashCode();
-    }
 
-    @Override
-    public String toString() {
-        return "EquityTrade[ref=%s, symbol=%s, qty=%s, price=%s %s, side=%s]"
-                .formatted(tradeRef, instrumentSymbol, quantity, price,
-                        currency.getCurrencyCode(), side);
-    }
+/**
+ * Returns the traded instrument symbol.
+ *
+ * @return instrument symbol of the equity security
+ */
+public String instrumentSymbol() {
+    return instrumentSymbol;
+}
 
-    /** Fluent builder. Required fields validated in {@link #build()}. */
-    public static final class Builder {
-        private TradeRef tradeRef;
-        private String instrumentSymbol;
-        private BigDecimal quantity;
-        private BigDecimal price;
-        private Currency currency;
-        private Side side;
-        private LocalDate tradeDate;
-        private long counterpartyId;
+/**
+ * Returns the quantity of shares traded.
+ *
+ * @return number of shares traded
+ */
+public BigDecimal quantity() {
+    return quantity;
+}
 
-        public Builder tradeRef(TradeRef v)           { this.tradeRef = v;        return this; }
-        public Builder instrumentSymbol(String v)     { this.instrumentSymbol = v; return this; }
-        public Builder quantity(BigDecimal v)         { this.quantity = v;        return this; }
-        public Builder price(BigDecimal v)            { this.price = v;           return this; }
-        public Builder currency(Currency v)           { this.currency = v;        return this; }
-        public Builder currency(String code)          { return currency(Currency.getInstance(code)); }
-        public Builder side(Side v)                   { this.side = v;            return this; }
-        public Builder tradeDate(LocalDate v)         { this.tradeDate = v;       return this; }
-        public Builder counterpartyId(long v)         { this.counterpartyId = v;  return this; }
+/**
+ * Returns the execution price per share.
+ *
+ * @return trade price per share
+ */
+public BigDecimal price() {
+    return price;
+}
 
-        public EquityTrade build() {
-            Objects.requireNonNull(tradeRef,         "tradeRef");
-            Objects.requireNonNull(instrumentSymbol, "instrumentSymbol");
-            Objects.requireNonNull(quantity,         "quantity");
-            Objects.requireNonNull(price,            "price");
-            Objects.requireNonNull(currency,         "currency");
-            Objects.requireNonNull(side,             "side");
-            Objects.requireNonNull(tradeDate,        "tradeDate");
-            if (quantity.signum() <= 0) throw new IllegalStateException("quantity must be > 0");
-            if (price.signum() <= 0)    throw new IllegalStateException("price must be > 0");
-            return new EquityTrade(this);
+/**
+ * Returns the currency in which the trade is denominated.
+ *
+ * @return trade currency
+ */
+public Currency currency() {
+    return currency;
+}
+
+/**
+ * Returns the direction of the trade.
+ *
+ * @return whether the trade is a buy or sell
+ */
+public Side side() {
+    return side;
+}
+
+/**
+ * Returns the identifier of the trade counterparty.
+ *
+ * @return unique counterparty identifier
+ */
+public long counterpartyId() {
+    return counterpartyId;
+}
+
+
+    /**
+ * Compares this trade with another object for equality.
+ *
+ * @param o object to compare with this trade
+ * @return {@code true} if the supplied object represents the same trade;
+ *         {@code false} otherwise
+ */
+@Override
+public boolean equals(Object o) {
+    return (o instanceof EquityTrade other)
+            && tradeRef.equals(other.tradeRef);
+}
+
+/**
+ * Returns a hash code consistent with {@link #equals(Object)}.
+ *
+ * @return hash code derived from the trade reference
+ */
+@Override
+public int hashCode() {
+    return tradeRef.hashCode();
+}
+
+/**
+ * Returns a human-readable representation of this equity trade.
+ *
+ * @return formatted string containing the key trade details
+ */
+@Override
+public String toString() {
+    return "EquityTrade[ref=%s, symbol=%s, qty=%s, price=%s %s, side=%s]"
+            .formatted(
+                    tradeRef,
+                    instrumentSymbol,
+                    quantity,
+                    price,
+                    currency.getCurrencyCode(),
+                    side);
+}
+
+    /**
+ * Builder for creating immutable {@link EquityTrade} instances.
+ */
+public static final class Builder {
+    private TradeRef tradeRef;
+    private String instrumentSymbol;
+    private BigDecimal quantity;
+    private BigDecimal price;
+    private Currency currency;
+    private Side side;
+    private LocalDate tradeDate;
+    private long counterpartyId;
+
+    public Builder tradeRef(TradeRef v)           { this.tradeRef = v; return this; }
+    public Builder instrumentSymbol(String v)     { this.instrumentSymbol = v; return this; }
+    public Builder quantity(BigDecimal v)         { this.quantity = v; return this; }
+    public Builder price(BigDecimal v)            { this.price = v; return this; }
+    public Builder currency(Currency v)           { this.currency = v; return this; }
+    public Builder currency(String code)          { return currency(Currency.getInstance(code)); }
+    public Builder side(Side v)                   { this.side = v; return this; }
+    public Builder tradeDate(LocalDate v)         { this.tradeDate = v; return this; }
+    public Builder counterpartyId(long v)         { this.counterpartyId = v; return this; }
+
+    /**
+     * Creates an immutable {@code EquityTrade} from the configured values.
+     *
+     * @return fully constructed equity trade
+     * @throws NullPointerException if any required field has not been provided
+     * @throws IllegalStateException if the quantity or price is not positive
+     */
+    public EquityTrade build() {
+        Objects.requireNonNull(tradeRef,         "tradeRef");
+        Objects.requireNonNull(instrumentSymbol, "instrumentSymbol");
+        Objects.requireNonNull(quantity,         "quantity");
+        Objects.requireNonNull(price,            "price");
+        Objects.requireNonNull(currency,         "currency");
+        Objects.requireNonNull(side,             "side");
+        Objects.requireNonNull(tradeDate,        "tradeDate");
+
+        if (quantity.signum() <= 0) {
+            throw new IllegalStateException("quantity must be > 0");
         }
+        if (price.signum() <= 0) {
+            throw new IllegalStateException("price must be > 0");
+        }
+
+        return new EquityTrade(this);
+    }
     }
 }

@@ -12,6 +12,9 @@ import java.util.Objects;
  * WHAT:    Option/derivative trade — underlying, strike, expiry, optionType.
  * HOW:     Same builder pattern. notional() = strike * quantity in the
  *          trade's currency (simplified — real derivatives use delta-adjusted).
+ * 
+ *  WHY:     Encapsulates derivative-specific trade attributes while providing
+ *          a consistent immutable TradeType implementation for reconciliation.
  * ============================================================================
  */
 public final class DerivativeTrade implements TradeType {
@@ -42,38 +45,172 @@ public final class DerivativeTrade implements TradeType {
         this.counterpartyId = b.counterpartyId;
     }
 
+
+    /**
+    *  Creates a new builder for constructing {@code DerivativeTrade} instances.
+    *
+    * @return a new builder configured for fluent trade creation
+    */
     public static Builder builder() { return new Builder(); }
 
-    @Override public TradeRef tradeRef()     { return tradeRef; }
-    @Override public LocalDate tradeDate()   { return tradeDate; }
-    @Override public AssetClass assetClass() { return AssetClass.DERIVATIVE; }
+    /**
+    * Returns the unique reference assigned to this trade.
+    *
+    * @return trade reference used to identify the trade
+    */
+    @Override
+    public TradeRef tradeRef() {
+        return tradeRef;
+    }
 
-    /** Simplified notional = strike * quantity in the trade currency. */
-    @Override public Money notional() {
+    /**
+    * Returns the execution date of the trade.
+    *
+    * @return date on which the trade was executed
+    */
+    @Override
+    public LocalDate tradeDate() {
+        return tradeDate;
+    }
+
+    /**
+    * Returns the asset class represented by this trade.
+     *
+    * @return {@link AssetClass#DERIVATIVE}
+    */
+    @Override
+    public AssetClass assetClass() {
+        return AssetClass.DERIVATIVE;
+    }
+    /**
+    * Returns the notional value of the derivative trade.
+    *
+    * @return monetary value calculated as the strike price multiplied by
+    *         the quantity in the trade currency
+    */
+    @Override
+    public Money notional() {
         return new Money(strike.multiply(quantity), currency);
     }
 
-    public String underlying()       { return underlying; }
-    public BigDecimal strike()       { return strike; }
-    public BigDecimal quantity()     { return quantity; }
-    public LocalDate expiry()        { return expiry; }
-    public OptionType optionType()   { return optionType; }
-    public Currency currency()       { return currency; }
-    public Side side()               { return side; }
-    public long counterpartyId()     { return counterpartyId; }
+    /**
+ * Returns the underlying asset of the derivative.
+ *
+ * @return underlying instrument name or symbol
+ */
+public String underlying() {
+    return underlying;
+}
 
-    @Override public boolean equals(Object o) {
-        return (o instanceof DerivativeTrade other) && tradeRef.equals(other.tradeRef);
-    }
-    @Override public int hashCode() {
-        return tradeRef.hashCode();
-    }
+/**
+ * Returns the strike price of the derivative.
+ *
+ * @return strike price of the derivative contract
+ */
+public BigDecimal strike() {
+    return strike;
+}
 
-    @Override public String toString() {
-        return "DerivativeTrade[ref=%s, %s %s on %s, strike=%s %s, qty=%s, expiry=%s, side=%s]"
-                .formatted(tradeRef, optionType, underlying, tradeDate, strike,
-                        currency.getCurrencyCode(), quantity, expiry, side);
-    }
+/**
+ * Returns the quantity of derivative contracts.
+ *
+ * @return number of contracts traded
+ */
+public BigDecimal quantity() {
+    return quantity;
+}
+
+/**
+ * Returns the expiry date of the derivative contract.
+ *
+ * @return contract expiry date
+ */
+public LocalDate expiry() {
+    return expiry;
+}
+
+/**
+ * Returns the option type of the derivative.
+ *
+ * @return whether the contract is a call or put option
+ */
+public OptionType optionType() {
+    return optionType;
+}
+
+/**
+ * Returns the currency in which the derivative trade is denominated.
+ *
+ * @return trade currency
+ */
+public Currency currency() {
+    return currency;
+}
+
+/**
+ * Returns the direction of the trade.
+ *
+ * @return whether the trade is a buy or sell
+ */
+public Side side() {
+    return side;
+}
+
+/**
+ * Returns the identifier of the trade counterparty.
+ *
+ * @return unique counterparty identifier
+ */
+public long counterpartyId() {
+    return counterpartyId;
+}
+
+/**
+ * Compares this trade with another object for equality.
+ *
+ * @param o object to compare with this trade
+ * @return {@code true} if the supplied object represents the same trade;
+ *         {@code false} otherwise
+ */
+@Override
+public boolean equals(Object o) {
+    return (o instanceof DerivativeTrade other)
+            && tradeRef.equals(other.tradeRef);
+}
+
+/**
+ * Returns a hash code consistent with {@link #equals(Object)}.
+ *
+ * @return hash code derived from the trade reference
+ */
+@Override
+public int hashCode() {
+    return tradeRef.hashCode();
+}
+
+/**
+ * Returns a human-readable representation of this derivative trade.
+ *
+ * @return formatted string containing the key trade details
+ */
+@Override
+public String toString() {
+    return "DerivativeTrade[ref=%s, %s %s on %s, strike=%s %s, qty=%s, expiry=%s, side=%s]"
+            .formatted(
+                    tradeRef,
+                    optionType,
+                    underlying,
+                    tradeDate,
+                    strike,
+                    currency.getCurrencyCode(),
+                    quantity,
+                    expiry,
+                    side);
+}
+
+/**
+ * Builder for creating immutable {@link DerivativeTrade} instances.
+ */
 
     public static final class Builder {
         private TradeRef tradeRef;
@@ -96,6 +233,15 @@ public final class DerivativeTrade implements TradeType {
         public Builder tradeDate(LocalDate v)      { this.tradeDate = v; return this; }
         public Builder counterpartyId(long v)      { this.counterpartyId = v; return this; }
 
+
+        /**
+        * Creates an immutable {@code DerivativeTrade} from the configured values.
+        *
+        * @return fully constructed derivative trade
+        * @throws NullPointerException if any required field has not been provided
+        * @throws IllegalStateException if the strike or quantity is not positive,
+        *         or if the expiry date is before the trade date
+        */
         public DerivativeTrade build() {
             Objects.requireNonNull(tradeRef,   "tradeRef");
             Objects.requireNonNull(underlying, "underlying");
