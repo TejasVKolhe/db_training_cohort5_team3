@@ -14,6 +14,9 @@ import java.util.Objects;
  * WHY:     Bonds need couponRate/maturity for downstream cashflow modelling.
  *          Modelling them on the trade is the simplest path for the demo.
  * ============================================================================
+ *
+ * Equality and hashing are derived from {@code tradeRef} alone; {@code
+ * toString} omits counterparty identity to avoid leaking PII into logs.
  */
 public final class BondTrade implements TradeType {
 
@@ -39,38 +42,147 @@ public final class BondTrade implements TradeType {
         this.counterpartyId = b.counterpartyId;
     }
 
+    /**
+     * Creates a new, empty {@link Builder} for assembling a {@code BondTrade}
+     * field by field.
+     *
+     * @return a fresh builder with no fields set; never {@code null}.
+     */
     public static Builder builder() { return new Builder(); }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return this trade's unique reference, the natural key used for
+     *         {@link #equals(Object)} and {@link #hashCode()}.
+     */
     @Override public TradeRef tradeRef()     { return tradeRef; }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return the business date this bond trade was struck on.
+     */
     @Override public LocalDate tradeDate()   { return tradeDate; }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return always {@link AssetClass#BOND} for this implementation.
+     */
     @Override public AssetClass assetClass() { return AssetClass.BOND; }
 
-    /** Notional = faceValue in the bond's currency. */
+    /**
+     * Returns the notional value of this bond trade, defined as its face
+     * value rather than a market or dirty price.
+     *
+     * @return the {@link #faceValue()} in {@link #currency()}; never
+     *         {@code null}.
+     */
     @Override public Money notional() {
         return new Money(faceValue, currency);
     }
 
+    /**
+     * Returns the International Securities Identification Number that
+     * uniquely identifies the traded bond issue.
+     *
+     * @return the ISIN; never {@code null}.
+     */
     public String isin()              { return isin; }
+
+    /**
+     * Returns the par (redemption) value of the bond traded, used as this
+     * trade's notional.
+     *
+     * @return the face value; never {@code null}.
+     */
     public BigDecimal faceValue()     { return faceValue; }
+
+    /**
+     * Returns the bond's annual coupon rate, used for downstream cashflow
+     * modelling rather than for pricing this trade itself.
+     *
+     * @return the coupon rate, expressed as a decimal (e.g. {@code 0.05}
+     *         for 5%); never {@code null}.
+     */
     public BigDecimal couponRate()    { return couponRate; }
+
+    /**
+     * Returns the date the bond redeems at face value.
+     *
+     * @return the maturity date; never {@code null}, and never before
+     *         {@link #tradeDate()}.
+     */
     public LocalDate maturityDate()   { return maturityDate; }
+
+    /**
+     * Returns the currency the bond's face value and coupon are denominated
+     * in.
+     *
+     * @return the trade currency; never {@code null}.
+     */
     public Currency currency()        { return currency; }
+
+    /**
+     * Returns whether this trade is a buy or a sell of the bond.
+     *
+     * @return the trade side; never {@code null}.
+     */
     public Side side()                { return side; }
+
+    /**
+     * Returns the internal identifier of the counterparty on the other side
+     * of this trade.
+     *
+     * @return the counterparty's database identifier.
+     */
     public long counterpartyId()      { return counterpartyId; }
 
+    /**
+     * Compares by {@code tradeRef} only — two {@code BondTrade} instances
+     * are equal iff they share the same natural key, regardless of any
+     * other field differing.
+     *
+     * @param o the object to compare against.
+     * @return {@code true} if {@code o} is a {@code BondTrade} with an
+     *         equal {@code tradeRef}.
+     */
     @Override public boolean equals(Object o) {
         return (o instanceof BondTrade other) && tradeRef.equals(other.tradeRef);
     }
+
+    /**
+     * Consistent with {@link #equals(Object)}: derived solely from
+     * {@code tradeRef}.
+     *
+     * @return the hash code of this trade's {@code tradeRef}.
+     */
     @Override public int hashCode() {
         return tradeRef.hashCode();
     }
 
+    /**
+     * Renders a compact, human-readable summary for logs, deliberately
+     * excluding {@code counterpartyId} to avoid printing identifying
+     * relationship data.
+     *
+     * @return a string of the form
+     *         {@code "BondTrade[ref=..., isin=..., face=... CCY, coupon=..., maturity=..., side=...]"}.
+     */
     @Override public String toString() {
         return "BondTrade[ref=%s, isin=%s, face=%s %s, coupon=%s, maturity=%s, side=%s]"
                 .formatted(tradeRef, isin, faceValue, currency.getCurrencyCode(),
                         couponRate, maturityDate, side);
     }
 
+    /**
+     * WHAT: Fluent builder for {@link BondTrade}.
+     * HOW:  Each setter returns {@code this}; {@link #build()} is the single
+     * chokepoint that validates every required field and invariant.
+     * WHY:  Keeps {@code BondTrade} immutable while avoiding a
+     * nine-argument constructor at the call site.
+     */
     public static final class Builder {
         private TradeRef tradeRef;
         private String isin;
@@ -90,6 +202,21 @@ public final class BondTrade implements TradeType {
         public Builder tradeDate(LocalDate v)      { this.tradeDate = v; return this; }
         public Builder counterpartyId(long v)      { this.counterpartyId = v; return this; }
 
+        /**
+         * Build the immutable {@link BondTrade}, validating that every required
+         * field is set and that all invariants hold.
+         *
+         * @return a fully-constructed, validated {@code BondTrade} — never
+         *         {@code null}.
+         * @throws NullPointerException  if any required field
+         *                               ({@code tradeRef}, {@code isin},
+         *                               {@code faceValue}, {@code couponRate},
+         *                               {@code maturityDate}, {@code currency},
+         *                               {@code side}, or {@code tradeDate})
+         *                               was not set.
+         * @throws IllegalStateException if {@code maturityDate} is before
+         *                               {@code tradeDate}.
+         */
         public BondTrade build() {
             Objects.requireNonNull(tradeRef,     "tradeRef");
             Objects.requireNonNull(isin,         "isin");

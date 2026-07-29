@@ -40,7 +40,7 @@ public record Money(BigDecimal amount, Currency currency) {
     }
 
     
-
+    /** Add another Money of the same currency. Throws on currency mismatch. */
     public Money plus(Money other) {
     Objects.requireNonNull(other, "other");
 
