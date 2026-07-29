@@ -72,7 +72,7 @@ public final class DerivativeTrade implements TradeType {
     @Override public String toString() {
         return "DerivativeTrade[ref=%s, %s %s on %s, strike=%s %s, qty=%s, expiry=%s, side=%s]"
                 .formatted(tradeRef, optionType, underlying, tradeDate, strike,
-                        currency.getCurrencyCode(), quantity, expiry, side);
+                           currency.getCurrencyCode(), quantity, expiry, side);
     }
 
     public static final class Builder {
