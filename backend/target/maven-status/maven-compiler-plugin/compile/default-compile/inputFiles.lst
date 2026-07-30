@@ -56,5 +56,10 @@ C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtra
 C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\security\SecurityConfig.java
 C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\InstrumentService.java
 C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\ReconciliationEngine.java
+<<<<<<< HEAD
+=======
+C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\ReconSummary.java
+C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\ReconSummaryCollector.java
+>>>>>>> origin/main
 C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\TradeAnalyticsService.java
 C:\Users\Admin\Desktop\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\TradeService.java

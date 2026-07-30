@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Map;
 
+import com.dbtraining.reconx.exception.InvalidTradeException;
+
 public final class TradeFactory {
 
     private TradeFactory() { }

@@ -68,7 +68,7 @@ public final class BondTrade implements TradeType {
     @Override public String toString() {
         return "BondTrade[ref=%s, isin=%s, face=%s %s, coupon=%s, maturity=%s, side=%s]"
                 .formatted(tradeRef, isin, faceValue, currency.getCurrencyCode(),
-                        couponRate, maturityDate, side);
+                           couponRate, maturityDate, side);
     }
 
     public static final class Builder {
