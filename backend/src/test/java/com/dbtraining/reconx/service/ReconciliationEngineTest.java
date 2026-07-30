@@ -21,6 +21,38 @@ class ReconciliationEngineTest {
 
     private final ReconciliationEngine engine = new ReconciliationEngine();
 
+    // single internal trade with no external feed -> one BREAK with MISSING_EXTERNAL
+@Test
+void testReconcile_singleInternalNoExternal_returnsBreak() {
+    EquityTrade internal = equity("EQU-20260603-0001", "100.00", "1000");
+
+    List<ReconResult> out = engine.reconcile(List.of(internal), List.of(), ReconciliationRule.EXACT);
+
+    assertThat(out).hasSize(1);
+    assertThat(out.get(0).status()).isEqualTo(ReconResult.Status.BREAK);
+    assertThat(out.get(0).discrepancyType()).isEqualTo("MISSING_EXTERNAL");
+}
+
+// all-mismatched -> ReconSummaryCollector reports total == broken, matched == 0
+@Test
+void testReconcile_allMismatched_summaryShowsZeroMatched() {
+    List<TradeType> internals = List.of(
+            equity("EQU-20260603-0001", "100.00", "1000"),
+            equity("EQU-20260603-0002", "100.00", "1000"),
+            equity("EQU-20260603-0003", "100.00", "1000"));
+    List<TradeType> externals = List.of(
+            equity("EQU-20260603-0001", "200.00", "1000"),
+            equity("EQU-20260603-0002", "200.00", "1000"),
+            equity("EQU-20260603-0003", "200.00", "1000"));
+
+    List<ReconResult> out = engine.reconcile(internals, externals, ReconciliationRule.EXACT);
+    ReconSummary summary = out.stream().collect(new ReconSummaryCollector());
+
+    assertThat(summary.total()).isEqualTo(3);
+    assertThat(summary.matched()).isEqualTo(0);
+    assertThat(summary.broken()).isEqualTo(3);
+}
+
 
     @DisplayName("Exact matching trades should return MATCHED")
 @Test

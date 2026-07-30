@@ -42,15 +42,14 @@ public class ReconciliationEngine {
     @Timed(value = "reconciliation.duration", description = "Wall time of reconcile()",
            percentiles = {0.5, 0.95, 0.99}, histogram = true)
     public List<ReconResult> reconcile(List<TradeType> internal,
-                                       List<TradeType> external,
-                                       ReconciliationRule rule) {
+                                   List<TradeType> external,
+                                   ReconciliationRule rule) {
         if (internal == null || internal.isEmpty()) return List.of();
-        List<TradeType> ext = external == null ? List.of() : external;
-        Map<String, TradeType> externalByRef = ext.stream()
-                .collect(Collectors.toMap(
-                        t -> t.tradeRef().value(),
-                        Function.identity(),
-                        (a, b) -> a));
+
+        Map<String, TradeType> externalByRef = (external == null ? List.<TradeType>of() : external)
+                .stream()
+                .collect(Collectors.toMap(t -> t.tradeRef().value(), Function.identity(), (a, b) -> a));
+
         return internal.parallelStream()
                 .map(in -> matchOne(in, externalByRef.get(in.tradeRef().value()), rule))
                 .toList();
