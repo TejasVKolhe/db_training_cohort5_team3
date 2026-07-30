@@ -56,5 +56,7 @@ D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\securit
 D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\security\SecurityConfig.java
 D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\InstrumentService.java
 D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\ReconciliationEngine.java
+D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\ReconSummary.java
+D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\ReconSummaryCollector.java
 D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\TradeAnalyticsService.java
 D:\db_training_cohort5_team3\backend\src\main\java\com\dbtraining\reconx\service\TradeService.java
