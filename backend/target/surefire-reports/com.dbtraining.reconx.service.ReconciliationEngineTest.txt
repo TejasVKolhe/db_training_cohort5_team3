@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.dbtraining.reconx.service.ReconciliationEngineTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.429 s -- in com.dbtraining.reconx.service.ReconciliationEngineTest
-=======
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.101 s -- in com.dbtraining.reconx.service.ReconciliationEngineTest
->>>>>>> a34a358f23cde921da65a3609ca353b78c7a71a2
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.119 s -- in com.dbtraining.reconx.service.ReconciliationEngineTest
