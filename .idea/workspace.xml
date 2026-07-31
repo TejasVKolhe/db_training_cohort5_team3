@@ -4,7 +4,84 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f230e0d1-fba7-4f28-b118-c849fc23d18f" name="Changes" comment="" />
+    <list default="true" id="f230e0d1-fba7-4f28-b118-c849fc23d18f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/ReconxApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/config/OpenApiConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/controller/AuditController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/controller/AuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/controller/ReconController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/controller/TradeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/LoginRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/LoginResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/PagedResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/ReconResult$Status.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/ReconResult.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/ReconRunRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/TradeEvent$EventType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/TradeEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/TradeMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/TradeMapperImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/TradeRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/dto/TradeResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/exception/DuplicateTradeRefException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/exception/GlobalExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/exception/InvalidTradeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/exception/ReconException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/exception/ReconciliationMismatchException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/exception/TradeNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/kafka/AlertConsumer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/kafka/AuditEventConsumer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/kafka/KafkaErrorHandlerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/kafka/KafkaTopicsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/kafka/ReconciliationConsumer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/kafka/TradeEventProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/BondTrade$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/BondTrade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/DerivativeTrade$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/DerivativeTrade$OptionType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/DerivativeTrade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/EquityTrade$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/EquityTrade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/FXTrade$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/FXTrade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/Money.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/ReconciliationRule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/Side.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/TradeFactory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/TradeFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/TradeRef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/TradeType$AssetClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/model/TradeType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/observability/DatabaseHealthIndicator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/observability/TradeMetrics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/AppUserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/AuditLogRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/CounterpartyRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/InstrumentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/ReconBreakRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/TradeRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/TradeSpecifications.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/entity/AppUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/entity/AuditLogEntry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/entity/Counterparty.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/entity/Instrument.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/entity/ReconBreak.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/repository/entity/Trade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/security/JwtAuthenticationFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/security/JwtTokenProvider.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/security/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/InstrumentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/ReconSummary$Builder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/ReconSummary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/ReconSummaryCollector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/ReconciliationEngine.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/TradeAnalyticsService$NotionalSummary.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/TradeAnalyticsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/dbtraining/reconx/service/TradeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/generated-sources/annotations/com/dbtraining/reconx/dto/TradeMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/generated-sources/annotations/com/dbtraining/reconx/dto/TradeMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +105,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/adv60-62",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/db_training_cohort5_team3",
     "settings.editor.selected.configurable": "MavenSettings"

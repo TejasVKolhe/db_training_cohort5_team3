@@ -1,11 +1,12 @@
 package com.dbtraining.reconx.service;
 
-import com.dbtraining.reconx.domain.Trade;
 import jakarta.persistence.EntityManager;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.dbtraining.reconx.repository.entity.Trade;
 
 import java.util.List;
 
