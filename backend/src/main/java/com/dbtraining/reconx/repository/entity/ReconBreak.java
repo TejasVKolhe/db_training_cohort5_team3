@@ -2,6 +2,7 @@ package com.dbtraining.reconx.repository.entity;
 
 import jakarta.persistence.*;
 import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * TICKET-ADV070 — Recon break record. Status transitions: OPEN -> RESOLVED.
@@ -17,6 +18,9 @@ public class ReconBreak {
 
     @Column(name = "trade_id", nullable = false)
     private Long tradeId;
+
+    @Column(name = "trade_date", nullable = false)
+    private LocalDate tradeDate;
 
     @Column(name = "discrepancy_type", nullable = false, length = 30)
     private String discrepancyType;
@@ -35,16 +39,18 @@ public class ReconBreak {
 
     public ReconBreak() {}
 
-    public Long getId()                { return id; }
-    public Long getTradeId()           { return tradeId; }
+    public Long getId() { return id; }
+    public Long getTradeId() { return tradeId; }
+    public LocalDate getTradeDate() { return tradeDate; }
     public String getDiscrepancyType() { return discrepancyType; }
-    public String getStatus()          { return status; }
-    public Instant getDetectedAt()     { return detectedAt; }
-    public Instant getResolvedAt()     { return resolvedAt; }
-    public String getResolutionNote()  { return resolutionNote; }
+    public String getStatus() { return status; }
+    public Instant getDetectedAt() { return detectedAt; }
+    public Instant getResolvedAt() { return resolvedAt; }
+    public String getResolutionNote() { return resolutionNote; }
 
-    public void setTradeId(Long v)              { this.tradeId = v; }
-    public void setDiscrepancyType(String v)    { this.discrepancyType = v; }
+    public void setTradeId(Long v) { this.tradeId = v; }
+    public void setTradeDate(LocalDate v) { this.tradeDate = v; }
+    public void setDiscrepancyType(String v) { this.discrepancyType = v; }
 
     public void resolve(String note) {
         this.status = "RESOLVED";
