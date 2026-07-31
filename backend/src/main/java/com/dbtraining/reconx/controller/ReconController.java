@@ -1,4 +1,5 @@
 package com.dbtraining.reconx.controller;
+import com.dbtraining.reconx.dto.ReconResultResponse;
 
 import com.dbtraining.reconx.dto.ReconRunRequest;
 import com.dbtraining.reconx.exception.TradeNotFoundException;
@@ -16,6 +17,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import com.dbtraining.reconx.dto.PagedResponse;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
 /**
  * TICKET-ADV068 — POST /api/v1/recon/run — returns 202 + jobId
@@ -42,13 +47,13 @@ public class ReconController {
     }
 
     @GetMapping("/jobs/{jobId}/results")
-    @Operation(summary = "Get results for a recon job")
-    public List<ReconBreak> results(@PathVariable String jobId) {
-        // TODO(TICKET-ADV069): once recon_jobs + recon_breaks tables are wired,
-        //   return breaks.findByJobId(jobId). Day-0 returns an empty list so
-        //   the React breaks-table renders "no breaks" gracefully.
-        return Collections.emptyList();
-    }
+@Operation(summary = "Get results for a recon job")
+public PagedResponse<ReconResultResponse> results(
+        @PathVariable String jobId,
+        @PageableDefault(size = 50) Pageable pageable) {
+
+    throw new UnsupportedOperationException("TICKET-ADV069");
+}
 
     @PutMapping("/results/{id}/resolve")
     @Operation(summary = "Mark a recon break as RESOLVED with a note")
