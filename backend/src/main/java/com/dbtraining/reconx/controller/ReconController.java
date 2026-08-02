@@ -1,5 +1,5 @@
 package com.dbtraining.reconx.controller;
-import com.dbtraining.reconx.dto.ReconResultResponse;
+
 
 import com.dbtraining.reconx.dto.ReconRunRequest;
 import com.dbtraining.reconx.exception.TradeNotFoundException;
@@ -18,9 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.dbtraining.reconx.dto.PagedResponse;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+
 
 /**
  * TICKET-ADV068 — POST /api/v1/recon/run — returns 202 + jobId
@@ -55,11 +53,8 @@ public class ReconController {
 
     @GetMapping("/jobs/{jobId}/results")
 @Operation(summary = "Get results for a recon job")
-public PagedResponse<ReconResultResponse> results(
-        @PathVariable String jobId,
-        @PageableDefault(size = 50) Pageable pageable) {
-
-    throw new UnsupportedOperationException("TICKET-ADV069");
+public List<ReconBreak> results(@PathVariable String jobId) {
+    return Collections.emptyList();
 }
 
     @PutMapping("/results/{id}/resolve")
