@@ -1,4 +1,10 @@
 /* ============================================================================
+   TICKET-ADV099 / TICKET-ADV100 — CSS custom properties + dark theme via data-theme
+   animations (fade-in, slide-in, pulse)
+   responsive breakpoints (desktop -> tablet -> mobile)
+   BEM naming: block__element--modifier
+   ============================================================================ */
+/* ============================================================================
    TICKET-ADV101 / ADV102 — CSS custom properties + dark theme via data-theme
    TICKET-ADV104 — animations (fade-in, slide-in, pulse)
    TICKET-ADV105 — responsive breakpoints (desktop -> tablet -> mobile)
