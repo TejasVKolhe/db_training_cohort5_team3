@@ -1,6 +1,6 @@
 // TICKET-ADV114 — Compound DataTable.
 // TICKET-ADV117 — useDebouncedSearch.
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withAuth } from '@components/withAuth.jsx';
 import DataTable from '@components/DataTable.jsx';
 import { useDebouncedSearch } from '@hooks/useDebouncedSearch.js';
@@ -12,31 +12,66 @@ function Trades() {
   const [page, setPage] = useState(0);
   const [data, setData] = useState({ items: [], totalPages: 0 });
 
-  // TODO(TICKET-ADV114 + ADV117): useEffect that:
-  //   - builds a query string from `page` and `debounced` (status filter)
-  //   - calls api.listTrades(params) and stores the response in `data`
-  //   - re-runs whenever `page` or `debounced` changes
-  //   - degrades gracefully on error (set empty page).
+  useEffect(() => {
+    async function loadTrades() {
+      try {
+        const params = new URLSearchParams();
+        params.set('page', page);
+
+        if (debounced) {
+          params.set('status', debounced);
+        }
+
+        const result = await api.listTrades(`?${params.toString()}`);
+
+        setData({
+          items: result?.items ?? [],
+          totalPages: result?.totalPages ?? 0,
+        });
+      } catch (error) {
+        console.error('Failed to load trades:', error);
+        setData({ items: [], totalPages: 0 });
+      }
+    }
+
+    loadTrades();
+  }, [page, debounced]);
 
   return (
     <section>
       <h2>Trades</h2>
+
       <input
         aria-label="Filter by status"
         placeholder="status filter (PENDING/MATCHED/…)"
         value={search}
         onChange={(e) => setSearch(e.target.value.toUpperCase())}
       />
+
       <DataTable>
-        <DataTable.Header columns={[
-          { key: 'tradeRef', label: 'Ref' },
-          { key: 'symbol',   label: 'Symbol' },
-          { key: 'qty',      label: 'Qty' },
-          { key: 'price',    label: 'Price' },
-          { key: 'status',   label: 'Status' },
-        ]} />
-        {/* TODO(TICKET-ADV114): render a DataTable.Body with `rows={data.items}`
-            and a `render` prop that returns one <span> per column. */}
+        <DataTable.Header
+          columns={[
+            { key: 'tradeRef', label: 'Ref' },
+            { key: 'symbol', label: 'Symbol' },
+            { key: 'qty', label: 'Qty' },
+            { key: 'price', label: 'Price' },
+            { key: 'status', label: 'Status' },
+          ]}
+        />
+
+        <DataTable.Body
+          rows={data.items}
+          render={(trade) => (
+            <>
+              <span>{trade.tradeRef}</span>
+              <span>{trade.symbol}</span>
+              <span>{trade.qty}</span>
+              <span>{trade.price}</span>
+              <span>{trade.status}</span>
+            </>
+          )}
+        />
+
         <DataTable.Pagination
           page={page}
           totalPages={Math.max(1, data.totalPages)}
