@@ -1,6 +1,4 @@
-// TICKET-ADV112-related — fetch wrapper that attaches Bearer JWT from sessionStorage.
 const BASE = '/api';
-
 
 function authHeaders() {
   const token = typeof sessionStorage !== 'undefined'
@@ -9,7 +7,6 @@ function authHeaders() {
 
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
-
 
 async function request(method, path, body) {
   const headers = {
@@ -53,6 +50,7 @@ export const api = {
   listTrades: (params = '') => request('GET', `/v1/trades${params}`),
 createTrade: (req) => request('POST', '/v1/trades', req),
 
+  createTrade: (req) => request('POST', '/v1/trades', req),
 
   updateStatus: (id, status) => {
     // TODO(TICKET-ADV119): PATCH /v1/trades/{id}/status with { status }.
