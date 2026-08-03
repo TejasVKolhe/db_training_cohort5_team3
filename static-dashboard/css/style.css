@@ -6,17 +6,28 @@
    ============================================================================ */
 :root {
   --color-primary: #003366;
+  --color-primary-2: #2E5FA3;
   --color-gold:    #C8A951;
   --color-slate:   #2E5FA3;
   --color-success: #28a745;
   --color-warning: #ffc107;
   --color-danger:  #dc3545;
   --color-bg:      #ffffff;
+  --color-bg-alt:  #f5f5f5;
   --color-text:    #1a1a1a;
+  --color-text-muted: #6c757d;
   --color-surface: #f5f5f5;
   --color-border:  #d4d4d4;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
-  --radius:  4px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;  --space-6: 32px;
+  --radius:  4px; --radius-lg: 8px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+
+  --font-size-sm:14px;
+  --font-size-md:16px;
+  --font-size-lg:20px;
+
 }
 /* File: static-dashboard/css/style.css — theme overrides */
 [data-theme="dark"] {
