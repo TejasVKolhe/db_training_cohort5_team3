@@ -16,6 +16,8 @@ public interface TradeRepository
 
     Optional<Trade> findByTradeRef(String tradeRef);
 
+    long countByStatus(String status);
+
     @Query("""
         SELECT t FROM Trade t
         WHERE t.tradeDate BETWEEN :from AND :to
